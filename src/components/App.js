@@ -1,17 +1,16 @@
-import logoPath from '../images/logo.svg';
 import profilePic from '../images/imageprofile-pic.jpg';
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
 
 function App() {
+
+
+  
   return (
     <>
       <div className="page">
-        <header className="header">
-          <img
-            src={logoPath}
-            alt="Logo Around the US"
-            className="header__logo"
-          />
-        </header>
+        <Header />
         <main className="content">
           <section className="profile">
             <div className="profile__container">
@@ -43,9 +42,7 @@ function App() {
             <ul className="cards__container"></ul>
           </section>
         </main>
-        <footer className="footer">
-          <p className="footer__copyright">&copy; Alrededor de los EEUU</p>
-        </footer>
+        <Footer />
 
         <section className="popup popup_edit_profile">
           <div className="popup__container">
