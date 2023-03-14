@@ -1,47 +1,35 @@
-import profilePic from '../images/imageprofile-pic.jpg';
 import React from 'react';
 import Header from './Header';
+import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
 
 function App() {
 
+  function handleEditAvatarClick() {
+      const popup = document.querySelector('.popup_image_profile');
+      popup.classList.add('popup_opened');
+    }
 
-  
+    function handleAddPlaceClick() {
+      const popup = document.querySelector('.popup_add_card');
+      popup.classList.add('popup_opened');
+    }
+
+    function handleEditProfileClick() {
+      const popup = document.querySelector('.popup_edit_profile');
+      popup.classList.add('popup_opened');
+    }
+
   return (
     <>
       <div className="page">
         <Header />
-        <main className="content">
-          <section className="profile">
-            <div className="profile__container">
-              <div className="profile__avatar-wrapper">
-                <img
-                  src={profilePic}
-                  alt="Profile Pic"
-                  className="profile__image"
-                />
-                <div className="profile__avatar-overlay"></div>
-              </div>
-              <div className="profile__information">
-                <div className="profile__wrap">
-                  <h1 className="profile__user">Jacques Cousteau</h1>
-                  <button
-                    type="button"
-                    className="profile__edit-button"
-                    aria-label="edit profile button"></button>
-                </div>
-                <p className="profile__profession">Explorador</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="profile__add-button"
-              aria-label="add button"></button>
-          </section>
-          <section className="cards">
-            <ul className="cards__container"></ul>
-          </section>
-        </main>
+        <Main 
+          onEditAvatar = {handleEditAvatarClick}
+          onAddPlace = {handleAddPlaceClick}
+          onEditProfile = {handleEditProfileClick}
+        />
         <Footer />
 
         <section className="popup popup_edit_profile">
@@ -55,7 +43,7 @@ function App() {
               className="popup__form popup__form_type_edit"
               action="#"
               name="edit"
-              novalidate>
+              noValidate>
               <label className="popup__field" htmlFor="popup-input-name">
                 <input
                   type="text"
@@ -108,7 +96,7 @@ function App() {
               className="popup__form popup__form_type_profile-image"
               action="#"
               name="image"
-              novalidate>
+              noValidate>
               <label className="popup__field" htmlFor="popup-input-image">
                 <input
                   type="url"
@@ -146,7 +134,7 @@ function App() {
               action="#"
               name="place"
               id="form-card"
-              novalidate>
+              noValidate>
               <label className="popup__field" htmlFor="popup-input-title">
                 <input
                   type="text"
@@ -194,7 +182,7 @@ function App() {
               className="popup__close-button popup__delete-close-button"
               aria-label="close button"></button>
             <h3 className="popup__title">¿Estás seguro?</h3>
-            <form className="popup__form" action="#" name="delete" novalidate>
+            <form className="popup__form" action="#" name="delete" noValidate>
               <button
                 type="submit"
                 className="popup__button popup__button_type_delete"
