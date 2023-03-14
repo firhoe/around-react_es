@@ -5,194 +5,75 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 
 function App() {
+  
+  function onEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
 
-  function handleEditAvatarClick() {
-      const popup = document.querySelector('.popup_image_profile');
-      popup.classList.add('popup_opened');
+  function onAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+  
+    function onEditAvatarClick() {
+      setIsEditAvatarPopupOpen(true);
+    } 
+    
+    function closeAllPopups() {
+      setIsEditProfilePopupOpen(false);
+      setIsAddPlacePopupOpen(false);
+      setIsEditAvatarPopupOpen(false);
     }
 
-    function handleAddPlaceClick() {
-      const popup = document.querySelector('.popup_add_card');
-      popup.classList.add('popup_opened');
-    }
+    function onDeleteCardClick() {
+      setisDeletePopupOpen(true);
+    } 
+    
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isDeletePopupOpen, setisDeletePopupOpen] = React.useState(false); 
 
-    function handleEditProfileClick() {
-      const popup = document.querySelector('.popup_edit_profile');
-      popup.classList.add('popup_opened');
-    }
 
   return (
     <>
       <div className="page">
         <Header />
-        <Main 
-          onEditAvatar = {handleEditAvatarClick}
-          onAddPlace = {handleAddPlaceClick}
-          onEditProfile = {handleEditProfileClick}
+        <Main
+          onEditProfile={onEditProfileClick}
+          onAddPlace={onAddPlaceClick}
+          onEditAvatar={onEditAvatarClick}
+          onDeleteCard={onDeleteCardClick}
         />
         <Footer />
 
-        <section className="popup popup_edit_profile">
-          <div className="popup__container">
-            <button
-              type="button"
-              className="popup__close-button"
-              aria-label="close button"></button>
-            <h3 className="popup__title">Editar Perfil</h3>
-            <form
-              className="popup__form popup__form_type_edit"
-              action="#"
-              name="edit"
-              noValidate>
-              <label className="popup__field" htmlFor="popup-input-name">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Nombre"
-                  id="popup-input-name"
-                  className="popup__input popup__input_type_name"
-                  minLength="2"
-                  maxLength="40"
-                  required
-                />
-                <span className="popup__error popup-input-name-error">
-                  Por favor, rellena este campo.
-                </span>
-              </label>
-              <label className="popup__field" htmlFor="popup-input-about">
-                <input
-                  type="text"
-                  name="about"
-                  placeholder="Ocupación"
-                  id="popup-input-about"
-                  className="popup__input popup__input_type_about"
-                  minLength="2"
-                  maxLength="200"
-                  required
-                />
-                <span className="popup__error popup-input-about-error">
-                  Por favor, rellena este campo.
-                </span>
-              </label>
-              <button
-                type="submit"
-                className="popup__button popup__button_type_edit"
-                aria-label="save button"
-                data-textcontent="Guardar">
-                Guardar
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm
+          name="edit_profile"
+          title="Editar Perfil"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+        />
 
-        <section className="popup popup_image_profile">
-          <div className="popup__container">
-            <button
-              type="button"
-              className="popup__close-button"
-              aria-label="close button"></button>
-            <h3 className="popup__title">Cambiar foto de Perfil</h3>
-            <form
-              className="popup__form popup__form_type_profile-image"
-              action="#"
-              name="image"
-              noValidate>
-              <label className="popup__field" htmlFor="popup-input-image">
-                <input
-                  type="url"
-                  name="image-link"
-                  placeholder="Imagen URL"
-                  id="popup-input-image"
-                  className="popup__input"
-                  value
-                  required
-                />
-                <span className="popup__error popup-input-image-error">
-                  Introduce una dirección web.
-                </span>
-              </label>
-              <button
-                type="submit"
-                className="popup__button popup__button_type_profile-image"
-                aria-label="save button"
-                data-textcontent="Guardar">
-                Guardar
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm
+          name="add_card"
+          title="Nuevo Lugar"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        />
 
-        <section className="popup popup_add_card">
-          <div className="popup__container">
-            <button
-              type="button"
-              className="popup__close-button popup__card-close-button"
-              aria-label="close button"></button>
-            <h3 className="popup__title">Nuevo Lugar</h3>
-            <form
-              className="popup__form popup__form_type_add-image"
-              action="#"
-              name="place"
-              id="form-card"
-              noValidate>
-              <label className="popup__field" htmlFor="popup-input-title">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Titulo"
-                  id="popup-input-title"
-                  className="popup__input"
-                  minLength="2"
-                  maxLength="30"
-                  required
-                />
-                <span className="popup__error popup-input-title-error">
-                  Por favor, rellena este campo.
-                </span>
-              </label>
-              <label className="popup__field" htmlFor="popup-input-link">
-                <input
-                  type="url"
-                  name="image-link"
-                  placeholder="Imagen URL"
-                  id="popup-input-link"
-                  className="popup__input"
-                  value
-                  required
-                />
-                <span className="popup__error popup-input-link-error">
-                  Por favor, introduce una dirección web.
-                </span>
-              </label>
-              <button
-                type="submit"
-                className="popup__button popup__create-card-button"
-                aria-label="create button"
-                data-textcontent="Crear">
-                Crear
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm
+          name="image_profile"
+          title="Cambiar foto de Perfil"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        />
 
-        <section className="popup popup_delete_card">
-          <div className="popup__container">
-            <button
-              type="button"
-              className="popup__close-button popup__delete-close-button"
-              aria-label="close button"></button>
-            <h3 className="popup__title">¿Estás seguro?</h3>
-            <form className="popup__form" action="#" name="delete" noValidate>
-              <button
-                type="submit"
-                className="popup__button popup__button_type_delete"
-                aria-label="delete button"
-                data-textcontent="Sí">
-                Sí
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm
+          name="delete_card"
+          title="Eliminar Lugar"
+          isOpen={isDeletePopupOpen}
+          onClose={closeAllPopups}
+        />
+        
 
         <section className="popup popup_preview_image">
           <div className="popup__container popup__container_role-image">

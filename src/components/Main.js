@@ -2,7 +2,7 @@ import React from "react";
 import profilePic from '../images/imageprofile-pic.jpg';
 
 function Main(props) {
-
+    
     return (
       <>
         <main className="content">
