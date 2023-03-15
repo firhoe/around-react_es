@@ -3,9 +3,26 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-//import {api} from '../utils/api';
+import {api} from '../utils/api';
 
 function App() {
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isDeletePopupOpen, setisDeletePopupOpen] = React.useState(false); 
+    
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
+
+  React.useEffect(() => {
+    api.getUserInfo().then((res) => {
+      setUserName(res.name);
+      setUserDescription(res.about);
+      setUserAvatar(res.avatar);
+    });
+  }, []);
   
   function onEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -29,12 +46,6 @@ function App() {
       setisDeletePopupOpen(true);
     } 
     
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [isDeletePopupOpen, setisDeletePopupOpen] = React.useState(false); 
-
-
   return (
     <>
       <div className="page">
@@ -44,6 +55,9 @@ function App() {
           onAddPlace={onAddPlaceClick}
           onEditAvatar={onEditAvatarClick}
           onDeleteCard={onDeleteCardClick}
+          userName={userName}
+          userDescription={userDescription}
+          userAvatar={userAvatar}
         />
         <Footer />
 

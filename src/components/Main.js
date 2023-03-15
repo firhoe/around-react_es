@@ -1,18 +1,7 @@
 import React from "react";
-import {api} from '../utils/api.js';
 
 function Main(props) {
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
-
-    React.useEffect(() => {
-      api.getUserInfo().then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      });
-    }, []);
+    
     return (
       <>
         <main className="content">
@@ -21,7 +10,7 @@ function Main(props) {
               <div className="profile__avatar-wrapper">
                 <img
                   className="profile__image"
-                  style={{backgroundImage: `url(${userAvatar})`}}
+                  src={props.userAvatar}
                   alt="profile image"
                 />
                 <div
@@ -30,14 +19,14 @@ function Main(props) {
               </div>
               <div className="profile__information">
                 <div className="profile__wrap">
-                  <h1 className="profile__user">{userName}</h1>
+                  <h1 className="profile__user">{props.userName}</h1>
                   <button
                     type="button"
                     className="profile__edit-button"
                     aria-label="edit profile button"
                     onClick={props.onEditProfile}></button>
                 </div>
-                <p className="profile__profession">{userDescription}</p>
+                <p className="profile__profession">{props.userDescription}</p>
               </div>
             </div>
             <button
