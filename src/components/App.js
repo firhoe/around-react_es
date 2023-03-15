@@ -51,22 +51,99 @@ function App() {
           name="edit_profile"
           title="Editar Perfil"
           isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-        />
+          onClose={closeAllPopups}>
+          <>
+            <label className="popup__field" htmlFor="popup-input-name">
+              <input
+                type="text"
+                name="name"
+                placeholder="Nombre"
+                id="popup-input-name"
+                className="popup__input popup__input_type_name"
+                minLength="2"
+                maxLength="40"
+                required
+              />
+              <span className="popup__error popup-input-name-error">
+                Por favor, rellena este campo.
+              </span>
+            </label>
+            <label className="popup__field" htmlFor="popup-input-about">
+              <input
+                type="text"
+                name="about"
+                placeholder="Ocupación"
+                id="popup-input-about"
+                className="popup__input popup__input_type_about"
+                minLength="2"
+                maxLength="200"
+                required
+              />
+              <span className="popup__error popup-input-about-error">
+                Por favor, rellena este campo.
+              </span>
+            </label>
+          </>
+        </PopupWithForm>
 
         <PopupWithForm
           name="add_card"
           title="Nuevo Lugar"
           isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-        />
+          onClose={closeAllPopups}>
+          <>
+            <label className="popup__field" htmlFor="popup-input-title">
+              <input
+                type="text"
+                name="title"
+                placeholder="Titulo"
+                id="popup-input-title"
+                className="popup__input"
+                minLength="2"
+                maxLength="30"
+                required
+              />
+              <span className="popup__error popup-input-title-error">
+                Por favor, rellena este campo.
+              </span>
+            </label>
+            <label className="popup__field" htmlFor="popup-input-link">
+              <input
+                type="url"
+                name="image-link"
+                placeholder="Imagen URL"
+                id="popup-input-link"
+                className="popup__input"
+                required
+              />
+              <span className="popup__error popup-input-link-error">
+                Por favor, introduce una dirección web.
+              </span>
+            </label>
+          </>
+        </PopupWithForm>
 
         <PopupWithForm
           name="image_profile"
           title="Cambiar foto de Perfil"
           isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        />
+          onClose={closeAllPopups}>
+          <>
+            <label className="popup__field" htmlFor="popup-input-image">
+              <input
+                type="url"
+                name="image-link"
+                placeholder="Imagen URL"
+                id="popup-input-image"
+                className="popup__input"
+                required
+              />
+              <span className="popup__error popup-input-image-error">
+                Introduce una dirección web.
+              </span>
+            </label>
+          </>
+        </PopupWithForm>
 
         <PopupWithForm
           name="delete_card"
@@ -74,7 +151,6 @@ function App() {
           isOpen={isDeletePopupOpen}
           onClose={closeAllPopups}
         />
-        
 
         <section className="popup popup_preview_image">
           <div className="popup__container popup__container_role-image">

@@ -20,9 +20,9 @@ function Main(props) {
             <div className="profile__container">
               <div className="profile__avatar-wrapper">
                 <img
-                  style={{backgroundImage: `url(${userAvatar})`}}
-                  alt="Profile Pic"
                   className="profile__image"
+                  style={{backgroundImage: `url(${userAvatar})`}}
+                  alt="profile image"
                 />
                 <div
                   className="profile__avatar-overlay"

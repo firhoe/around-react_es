@@ -17,14 +17,6 @@ function PopupWithForm(props) {
           name={props.name}
           noValidate>
           {props.children}
-          <label htmlFor="name" className="popup__field"></label>
-          <input
-            name="name"
-            type={'text'}
-            id="name"
-            className="popup__input"
-            required
-          />
           <button
             type="submit"
             className={`popup__button popup__button_type_${props.name}`}>
