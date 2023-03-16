@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/around-react_es/static/css/main.b1c573e2.css",
+    "main.js": "/around-react_es/static/js/main.081b7941.js",
+    "static/media/logo.svg": "/around-react_es/static/media/logo.564af492f4be9b1186b759c10a73f4c8.svg",
+    "index.html": "/around-react_es/index.html",
+    "static/media/trash-icon.svg": "/around-react_es/static/media/trash-icon.ba43124316072f7a8629.svg",
+    "static/media/blackheart-icon.svg": "/around-react_es/static/media/blackheart-icon.f8482d28867cec189b08.svg",
+    "static/media/heart-icon.svg": "/around-react_es/static/media/heart-icon.70d54dffd264e73649ba.svg",
+    "static/media/close-icon.svg": "/around-react_es/static/media/close-icon.471c81f48689bda2abab.svg",
+    "static/media/pencil-vector.svg": "/around-react_es/static/media/pencil-vector.ae1a976ddb506239e9f0.svg",
+    "static/media/edit-icon.svg": "/around-react_es/static/media/edit-icon.dd0216e57795a77daa67.svg",
+    "static/media/add-icon.svg": "/around-react_es/static/media/add-icon.199d147dad974005fc31.svg",
+    "main.b1c573e2.css.map": "/around-react_es/static/css/main.b1c573e2.css.map",
+    "main.081b7941.js.map": "/around-react_es/static/js/main.081b7941.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1c573e2.css",
+    "static/js/main.081b7941.js"
+  ]
+}
