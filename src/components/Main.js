@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './Card';
 
 function Main(props) {
   return (
@@ -37,21 +38,12 @@ function Main(props) {
         <section className="cards">
           <ul className="cards__container">
             {props.cards.map((card) => (
-              <li key={card._id} className="card">
-                <button type="button" className="card__delete-button" onClick={props.onDeleteCard}></button>
-                <img src={card.link} alt={card.name} className="card__image" />
-                <div className="card__information">
-                  <h2 className="card__title">{card.name}</h2>
-                  <div className="card__like-container">
-                    <button
-                      type="button"
-                      className="card__like-button"></button>
-                    <p className="card__like-counter">
-                      0
-                    </p>
-                  </div>
-                </div>
-              </li>
+              <Card
+                key={card._id}
+                card={card}
+                onCardClick={props.onCardClick}
+                onDeleteCard={props.onDeleteCard}
+              />
             ))}
           </ul>
         </section>

@@ -11,13 +11,15 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isDeletePopupOpen, setisDeletePopupOpen] = React.useState(false); 
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false); 
   
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({});
+  const [isCardOpen, setIsCardOpen] = React.useState(false);
   
   React.useEffect(() => {
     api.getUserInfo().then((res) => {
@@ -46,14 +48,20 @@ function App() {
   } 
   
   function onDeleteCardClick() {
-    setisDeletePopupOpen(true);
+    setIsDeletePopupOpen(true);
   } 
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsCardOpen(true);
+  }
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setisDeletePopupOpen(false);
+    setIsDeletePopupOpen(false);
+    setIsCardOpen(false);
   }
 
   return (
@@ -65,6 +73,7 @@ function App() {
           onAddPlace={onAddPlaceClick}
           onEditAvatar={onEditAvatarClick}
           onDeleteCard={onDeleteCardClick}
+          onCardClick={handleCardClick}
           cards={cards}
           userName={userName}
           userDescription={userDescription}
@@ -179,7 +188,7 @@ function App() {
 
         <ImagePopup
           card={selectedCard}
-          isOpen
+          isOpen={isCardOpen}
           onClose={closeAllPopups}
         />
       </div>    
