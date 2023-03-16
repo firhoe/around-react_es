@@ -20,7 +20,7 @@ function PopupWithForm(props) {
           <button
             type="submit"
             className={`popup__button popup__button_type_${props.name}`}>
-            Guardar
+            {props.name === 'delete_card' ? 'Si' : 'Guardar'}
           </button>
         </form>
       </div>
