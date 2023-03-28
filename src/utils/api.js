@@ -42,9 +42,9 @@ class Api {
     return this._makeRequest('POST', `${this._baseUrl}/cards`, {name, link});
   }
 
-  // removeCard(cardId) {
-  //   return this._makeRequest('DELETE', `${this._baseUrl}/cards/${cardId}`);
-  // }
+  removeCard(cardId) {
+    return this._makeRequest('DELETE', `${this._baseUrl}/cards/${cardId}`);
+  }
 
   setUserAvatar(avatar) {
     return this._makeRequest('PATCH', `${this._baseUrl}/users/me/avatar`, {
@@ -52,16 +52,20 @@ class Api {
     });
   }
 
-  // addLike(cardId) {
-  //   return this._makeRequest('PUT', `${this._baseUrl}/cards/likes/${cardId}`);
-  // }
+  changeLikeCardStatus(cardId, liked){
+    return liked ? this.removeLike(cardId) : this.addLike(cardId);
+  }
 
-  // removeLike(cardId) {
-  //   return this._makeRequest(
-  //     'DELETE',
-  //     `${this._baseUrl}/cards/likes/${cardId}`
-  //   );
-  // }
+  addLike(cardId) {
+    return this._makeRequest('PUT', `${this._baseUrl}/cards/likes/${cardId}`);
+  }
+
+  removeLike(cardId) {
+    return this._makeRequest(
+      'DELETE',
+      `${this._baseUrl}/cards/likes/${cardId}`
+    );
+  }
 }
 
 const api = new Api({
