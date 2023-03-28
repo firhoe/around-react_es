@@ -26,6 +26,8 @@ function Card(props) {
     props.onDeleteCard(props.card);
   }
 
+  
+
   return (
     <>
       <li key={props.card._id} className="card">

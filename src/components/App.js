@@ -35,7 +35,8 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   } 
   
-  function onDeleteCardClick() {
+  function onDeleteCardClick(card) {
+    setSelectedCard(card);
     setIsDeletePopupOpen(true);
   } 
 
@@ -67,7 +68,7 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card._id)
+      .removeCard(card._id)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== card._id);
         setCards(newCards);
@@ -108,6 +109,7 @@ function App() {
             onDeleteCard={onDeleteCardClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
             cards={cards}
             userName={userName}
             userDescription={userDescription}
@@ -215,10 +217,11 @@ function App() {
 
           <PopupWithForm
             name="delete_card"
-            title="Eliminar Lugar"
+            title="¿Estás seguro?"
+            card={selectedCard}
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
-            
+            onCardDelete={handleCardDelete}
           />
 
           <ImagePopup
