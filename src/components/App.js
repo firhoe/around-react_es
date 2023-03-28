@@ -54,11 +54,27 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    })
-    .catch((err) => console.log(err));
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  }
+
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        const newCards = cards.filter((c) => c._id !== card._id);
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   React.useEffect(() => {
@@ -202,6 +218,7 @@ function App() {
             title="Eliminar Lugar"
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
+            
           />
 
           <ImagePopup
