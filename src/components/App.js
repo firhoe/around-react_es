@@ -66,12 +66,15 @@ function App() {
       });
   }
 
-  function handleCardDelete(card) {
+  function handleCardDelete(evt) {
+    evt.preventDefault();
+    const card = selectedCard;
     api
       .removeCard(card._id)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== card._id);
         setCards(newCards);
+        setIsDeletePopupOpen(false);
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
@@ -111,9 +114,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             cards={cards}
-            userName={userName}
-            userDescription={userDescription}
-            userAvatar={userAvatar}
+            
           />
           <Footer />
 
@@ -121,6 +122,7 @@ function App() {
             name="edit_profile"
             title="Editar Perfil"
             isOpen={isEditProfilePopupOpen}
+            onSubmit={() => {}}
             onClose={closeAllPopups}>
             <>
               <label className="popup__field" htmlFor="popup-input-name">
@@ -160,6 +162,7 @@ function App() {
             name="add_card"
             title="Nuevo Lugar"
             isOpen={isAddPlacePopupOpen}
+            onSubmit={() => {}}
             onClose={closeAllPopups}>
             <>
               <label className="popup__field" htmlFor="popup-input-title">
@@ -197,6 +200,7 @@ function App() {
             name="image_profile"
             title="Cambiar foto de Perfil"
             isOpen={isEditAvatarPopupOpen}
+            onSubmit={() => {}}
             onClose={closeAllPopups}>
             <>
               <label className="popup__field" htmlFor="popup-input-image">
@@ -221,7 +225,7 @@ function App() {
             card={selectedCard}
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
-            onCardDelete={handleCardDelete}
+            onSubmit={handleCardDelete}
           />
 
           <ImagePopup
