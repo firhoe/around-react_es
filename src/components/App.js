@@ -15,10 +15,6 @@ function App() {
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false); 
   const [isCardOpen, setIsCardOpen] = React.useState(false);
   
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
-  
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({});
@@ -85,9 +81,6 @@ function App() {
     api
       .getUserInfo()
       .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
         setCurrentUser(res);
       })
       .catch((err) => console.log(err));
@@ -112,7 +105,6 @@ function App() {
             onDeleteCard={onDeleteCardClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
             cards={cards}
             
           />
