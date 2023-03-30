@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from './ImagePopup';
 import {api} from '../utils/api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -82,7 +83,16 @@ function App() {
   function handleUpdateUser({name, about}) {
     api.setUserInfo({name, about}).then((data) => {
       setCurrentUser(data);
-      closeAllPopups();
+      setIsEditProfilePopupOpen(false);
+    }).catch((err) => {
+      console.log(`Error: ${err}`);
+    });
+  }
+
+  function handleUpdateAvatar({avatar}) {
+    api.setUserAvatar(avatar).then((data) => {
+      setCurrentUser(data);
+      setIsEditAvatarPopupOpen(false);
     }).catch((err) => {
       console.log(`Error: ${err}`);
     });
@@ -126,6 +136,12 @@ function App() {
             onUpdateUser={handleUpdateUser}
           />
 
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+
           <PopupWithForm
             name="add_card"
             title="Nuevo Lugar"
@@ -159,29 +175,6 @@ function App() {
                 />
                 <span className="popup__error popup-input-link-error">
                   Por favor, introduce una dirección web.
-                </span>
-              </label>
-            </>
-          </PopupWithForm>
-
-          <PopupWithForm
-            name="image_profile"
-            title="Cambiar foto de Perfil"
-            isOpen={isEditAvatarPopupOpen}
-            onSubmit={() => {}}
-            onClose={closeAllPopups}>
-            <>
-              <label className="popup__field" htmlFor="popup-input-image">
-                <input
-                  type="url"
-                  name="image-link"
-                  placeholder="Imagen URL"
-                  id="popup-input-image"
-                  className="popup__input"
-                  required
-                />
-                <span className="popup__error popup-input-image-error">
-                  Introduce una dirección web.
                 </span>
               </label>
             </>
