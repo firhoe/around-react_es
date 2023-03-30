@@ -3,6 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from './ImagePopup';
 import {api} from '../utils/api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -36,6 +37,11 @@ function App() {
     setIsDeletePopupOpen(true);
   } 
 
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsCardOpen(true);
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -44,10 +50,6 @@ function App() {
     setIsCardOpen(false);
   }
 
-  function handleCardClick(card) {
-    setSelectedCard(card);
-    setIsCardOpen(true);
-  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -75,6 +77,15 @@ function App() {
       .catch((err) => {
         console.log(`Error: ${err}`);
       });
+  }
+
+  function handleUpdateUser({name, about}) {
+    api.setUserInfo({name, about}).then((data) => {
+      setCurrentUser(data);
+      closeAllPopups();
+    }).catch((err) => {
+      console.log(`Error: ${err}`);
+    });
   }
 
   React.useEffect(() => {
@@ -106,49 +117,14 @@ function App() {
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
             cards={cards}
-            
           />
           <Footer />
 
-          <PopupWithForm
-            name="edit_profile"
-            title="Editar Perfil"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            onSubmit={() => {}}
-            onClose={closeAllPopups}>
-            <>
-              <label className="popup__field" htmlFor="popup-input-name">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Nombre"
-                  id="popup-input-name"
-                  className="popup__input popup__input_type_name"
-                  minLength="2"
-                  maxLength="40"
-                  required
-                />
-                <span className="popup__error popup-input-name-error">
-                  Por favor, rellena este campo.
-                </span>
-              </label>
-              <label className="popup__field" htmlFor="popup-input-about">
-                <input
-                  type="text"
-                  name="about"
-                  placeholder="Ocupación"
-                  id="popup-input-about"
-                  className="popup__input popup__input_type_about"
-                  minLength="2"
-                  maxLength="200"
-                  required
-                />
-                <span className="popup__error popup-input-about-error">
-                  Por favor, rellena este campo.
-                </span>
-              </label>
-            </>
-          </PopupWithForm>
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
 
           <PopupWithForm
             name="add_card"
