@@ -5,6 +5,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import {api} from '../utils/api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -98,6 +99,15 @@ function App() {
     });
   }
 
+  function handleAddPlaceSubmit(name, link) {
+    api.addCard({name, link}).then((newCard) => {
+      setCards([newCard, ...cards]);
+      setIsAddPlacePopupOpen(false);
+    }).catch((err) => {
+      console.log(`Error: ${err}`);
+    });
+  }
+
   React.useEffect(() => {
     api
       .getUserInfo()
@@ -142,43 +152,11 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
-          <PopupWithForm
-            name="add_card"
-            title="Nuevo Lugar"
+          <AddPlacePopup 
             isOpen={isAddPlacePopupOpen}
-            onSubmit={() => {}}
-            onClose={closeAllPopups}>
-            <>
-              <label className="popup__field" htmlFor="popup-input-title">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Titulo"
-                  id="popup-input-title"
-                  className="popup__input"
-                  minLength="2"
-                  maxLength="30"
-                  required
-                />
-                <span className="popup__error popup-input-title-error">
-                  Por favor, rellena este campo.
-                </span>
-              </label>
-              <label className="popup__field" htmlFor="popup-input-link">
-                <input
-                  type="url"
-                  name="image-link"
-                  placeholder="Imagen URL"
-                  id="popup-input-link"
-                  className="popup__input"
-                  required
-                />
-                <span className="popup__error popup-input-link-error">
-                  Por favor, introduce una dirección web.
-                </span>
-              </label>
-            </>
-          </PopupWithForm>
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
 
           <PopupWithForm
             name="delete_card"
