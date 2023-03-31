@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
+import DeletePopup from './DeletePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -66,8 +66,7 @@ function App() {
       });
   }
 
-  function handleCardDelete(evt) {
-    evt.preventDefault();
+  function handleCardDelete() {
     const card = selectedCard;
     api
       .removeCard(card._id)
@@ -152,19 +151,17 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
-          <AddPlacePopup 
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
           />
 
-          <PopupWithForm
-            name="delete_card"
-            title="¿Estás seguro?"
+          <DeletePopup
             card={selectedCard}
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
-            onSubmit={handleCardDelete}
+            onCardDelete={handleCardDelete}
           />
 
           <ImagePopup

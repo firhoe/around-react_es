@@ -1,6 +1,11 @@
 import React from "react";
 
 function PopupWithForm(props) {
+
+  function handleInput() {
+
+  }
+
   return (
     <section
       className={`popup popup_${props.name} ${
@@ -16,6 +21,7 @@ function PopupWithForm(props) {
           className={`popup__form popup__form_type_${props.name}`}
           name={props.name}
           onSubmit={props.onSubmit}
+          onInput={handleInput}
           noValidate>
           {props.children}
           <button
