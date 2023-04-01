@@ -11,17 +11,18 @@ import {api} from '../utils/api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function App() {
-  
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false); 
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
   const [isCardOpen, setIsCardOpen] = React.useState(false);
-  
+
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({});
-    
+
   function onEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -29,15 +30,15 @@ function App() {
   function onAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
-  
+
   function onEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-  } 
-  
+  }
+
   function onDeleteCardClick(card) {
     setSelectedCard(card);
     setIsDeletePopupOpen(true);
-  } 
+  }
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -51,7 +52,6 @@ function App() {
     setIsDeletePopupOpen(false);
     setIsCardOpen(false);
   }
-
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -81,30 +81,39 @@ function App() {
   }
 
   function handleUpdateUser({name, about}) {
-    api.setUserInfo({name, about}).then((data) => {
-      setCurrentUser(data);
-      setIsEditProfilePopupOpen(false);
-    }).catch((err) => {
-      console.log(`Error: ${err}`);
-    });
+    api
+      .setUserInfo({name, about})
+      .then((data) => {
+        setCurrentUser(data);
+        setIsEditProfilePopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   function handleUpdateAvatar({avatar}) {
-    api.setUserAvatar(avatar).then((data) => {
-      setCurrentUser(data);
-      setIsEditAvatarPopupOpen(false);
-    }).catch((err) => {
-      console.log(`Error: ${err}`);
-    });
+    api
+      .setUserAvatar(avatar)
+      .then((data) => {
+        setCurrentUser(data);
+        setIsEditAvatarPopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   function handleAddPlaceSubmit(name, link) {
-    api.addCard({name, link}).then((newCard) => {
-      setCards([newCard, ...cards]);
-      setIsAddPlacePopupOpen(false);
-    }).catch((err) => {
-      console.log(`Error: ${err}`);
-    });
+    api
+      .addCard({name, link})
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        setIsAddPlacePopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   React.useEffect(() => {
@@ -120,8 +129,7 @@ function App() {
     api.getCardList().then((res) => {
       setCards(res);
     });
-  }, []); 
-
+  }, []);
 
   return (
     <>

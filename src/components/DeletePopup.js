@@ -1,23 +1,21 @@
-import React from "react";
-import PopupWithForm from "./PopupWithForm";
-
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function DeletePopup(props) {
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        props.onCardDelete(props.card); 
-    }
-    return (
-      <PopupWithForm
-        name="delete_card"
-        title="¿Estás seguro?"
-        card={props.card}
-        isOpen={props.isOpen}
-        onClose={props.onClose}
-        onSubmit={handleSubmit}
-      />
-    );
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onCardDelete(props.card);
+  }
+  return (
+    <PopupWithForm
+      name="delete_card"
+      title="¿Estás seguro?"
+      card={props.card}
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
+    />
+  );
 }
 
 export default DeletePopup;

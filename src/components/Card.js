@@ -25,7 +25,6 @@ function Card(props) {
   function handleDeleteClick() {
     props.onDeleteCard(props.card);
   }
-  
 
   return (
     <>
@@ -58,6 +57,3 @@ function Card(props) {
 }
 
 export default Card;
-
-
-

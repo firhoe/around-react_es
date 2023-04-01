@@ -1,10 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function PopupWithForm(props) {
-
-  function handleInput() {
-
-  }
+  function handleInput() {}
 
   return (
     <section
@@ -34,6 +31,5 @@ function PopupWithForm(props) {
     </section>
   );
 }
-
 
 export default PopupWithForm;
