@@ -5,6 +5,7 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
+  const [errors, setErrors] = React.useState({}); 
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
 
@@ -23,10 +24,12 @@ function EditProfilePopup(props) {
 
   function handleNameChange(evt) {
     setName(evt.target.value);
+    
   }
 
   function handleDescriptionChange(evt) {
     setDescription(evt.target.value);
+    
   }
 
   return (
@@ -35,7 +38,9 @@ function EditProfilePopup(props) {
       title="Editar Perfil"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      errors={errors}
+      setErrors={setErrors}>
       <>
         <label className="popup__field" htmlFor="popup-input-name">
           <input
@@ -50,8 +55,8 @@ function EditProfilePopup(props) {
             onChange={handleNameChange}
             required
           />
-          <span className="popup__error popup-input-name-error">
-            Por favor, rellena este campo.
+          <span className="popup__error popup__error_visible">
+            {errors.name}
           </span>
         </label>
         <label className="popup__field" htmlFor="popup-input-about">
@@ -67,8 +72,8 @@ function EditProfilePopup(props) {
             onChange={handleDescriptionChange}
             required
           />
-          <span className="popup__error popup-input-about-error">
-            Por favor, rellena este campo.
+          <span className="popup__error popup__error_visible">
+            {errors.about}
           </span>
         </label>
       </>

@@ -1,7 +1,21 @@
 import React from 'react';
 
 function PopupWithForm(props) {
-  function handleInput() {}
+  
+  const handleInput = (event) => {
+    
+    const data = props.errors[props.name] ? props.errors[props.name] : {};
+    
+    if (event.target.validity.valid) {
+      data[event.target.name] = '';
+    } else {
+      data[event.target.name] = event.target.validationMessage;
+    }
+    const newErrors = {...props.errors};
+    newErrors[props.name] = data;
+    console.log('arroz', newErrors);
+    props.setErrors(data);
+  };
 
   return (
     <section
