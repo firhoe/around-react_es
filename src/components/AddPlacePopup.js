@@ -3,6 +3,8 @@ import PopupWithForm from "./PopupWithForm";
 
 
 function AddPlacePopup(props) {
+
+    const [errors, setErrors] = React.useState({}); 
     const [name, setName] = React.useState("");
     const [link, setLink] = React.useState("");
 
@@ -22,7 +24,9 @@ function AddPlacePopup(props) {
         title="Nuevo Lugar"
         isOpen={props.isOpen}
         onClose={props.onClose}
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+        errors={errors}
+        setErrors={setErrors}>
         <>
           <label className="popup__field" htmlFor="popup-input-title">
             <input
@@ -37,8 +41,8 @@ function AddPlacePopup(props) {
               maxLength="30"
               required
             />
-            <span className="popup__error popup-input-title-error">
-              Por favor, rellena este campo.
+            <span className="popup__error popup__error_visible">
+              {errors.title}
             </span>
           </label>
           <label className="popup__field" htmlFor="popup-input-link">
@@ -52,8 +56,8 @@ function AddPlacePopup(props) {
               className="popup__input"
               required
             />
-            <span className="popup__error popup-input-link-error">
-              Por favor, introduce una dirección web.
+            <span className="popup__error popup__error_visible">
+              {errors['image-link']}
             </span>
           </label>
         </>

@@ -1,20 +1,27 @@
 import React from 'react';
+import { useRef } from 'react';
 
 function PopupWithForm(props) {
-  
+
+  const formRef = useRef(null);
+
   const handleInput = (event) => {
-    
-    const data = props.errors[props.name] ? props.errors[props.name] : {};
-    
-    if (event.target.validity.valid) {
-      data[event.target.name] = '';
-    } else {
-      data[event.target.name] = event.target.validationMessage;
+    const input = event.target;
+    const errors = {};
+
+    if (!input.form) {
+      return;
     }
-    const newErrors = {...props.errors};
-    newErrors[props.name] = data;
-    console.log('arroz', newErrors);
-    props.setErrors(data);
+
+    // Validar ambos inputs dentro del formulario
+    formRef.current.querySelectorAll('input').forEach((input) => {
+      if (!input.validity.valid) {
+        errors[input.name] = input.validationMessage;
+      }
+    });
+
+    // Actualizar el estado de los errores
+    props.setErrors(errors);
   };
 
   return (
@@ -33,6 +40,7 @@ function PopupWithForm(props) {
           name={props.name}
           onSubmit={props.onSubmit}
           onInput={handleInput}
+          ref={formRef}
           noValidate>
           {props.children}
           <button

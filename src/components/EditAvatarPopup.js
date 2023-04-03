@@ -4,7 +4,7 @@ import PopupWithForm from './PopupWithForm';
 function EditAvatarPopup(props) {
     
     const imageRef = React.useRef();
-
+    const [errors, setErrors] = React.useState({}); 
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -20,7 +20,8 @@ function EditAvatarPopup(props) {
         isOpen={props.isOpen}
         onClose={props.onClose}
         onSubmit={handleSubmit}
-        >
+        errors={errors}
+        setErrors={setErrors}>
         <>
           <label className="popup__field" htmlFor="popup-input-image">
             <input
@@ -32,8 +33,8 @@ function EditAvatarPopup(props) {
               ref={imageRef}
               required
             />
-            <span className="popup__error popup-input-image-error">
-              Introduce una dirección web.
+            <span className="popup__error popup__error_visible">
+              {errors['image-link']}
             </span>
           </label>
         </>
