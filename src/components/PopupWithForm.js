@@ -7,18 +7,17 @@ function PopupWithForm(props) {
 
   const handleInput = (event) => {
     const input = event.target;
-    const errors = {};
+    const errors = {...props.errors};
 
     if (!input.form) {
       return;
     }
 
-    // Validar ambos inputs dentro del formulario
-    formRef.current.querySelectorAll('input').forEach((input) => {
-      if (!input.validity.valid) {
-        errors[input.name] = input.validationMessage;
-      }
-    });
+    if (!input.validity.valid) {
+      errors[input.name] = input.validationMessage;
+    } else {
+      errors[input.name] = '';
+    }
 
     // Actualizar el estado de los errores
     props.setErrors(errors);
