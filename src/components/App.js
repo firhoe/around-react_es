@@ -90,9 +90,6 @@ function App() {
       .catch((err) => {
         console.log(`Error: ${err}`);
       })
-      .finally(() => {
-        closeAllPopups();
-      });
   }
 
   function handleUpdateAvatar({avatar}) {
@@ -105,9 +102,6 @@ function App() {
       .catch((err) => {
         console.log(`Error: ${err}`);
       })
-      .finally(() => {
-        closeAllPopups();
-      });
   }
 
   function handleAddPlaceSubmit(name, link) {
@@ -120,9 +114,6 @@ function App() {
       .catch((err) => {
         console.log(`Error: ${err}`);
       })
-      .finally(() => {
-        closeAllPopups();
-      });
   }
 
   React.useEffect(() => {
