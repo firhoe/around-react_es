@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function PopupWithForm(props) {
   const formRef = useRef(null);
-  const [formInvalid, setFormInvalid] = useState(true);
+  const [formInvalid, setFormInvalid] = useState(props.name !== 'delete_card');
 
   const handleInput = (event) => {
     const input = event.target;
@@ -46,9 +46,14 @@ function PopupWithForm(props) {
           onClick={props.onClose}></button>
         <h3 className="popup__title">{props.title}</h3>
         <form
-          className={`popup__form popup__form_type_${props.name}`}
+          className={`popup_form popupform_type${props.name}`}
           name={props.name}
-          onSubmit={props.onSubmit}
+          onSubmit={(evt) => {
+            props.onSubmit(evt);
+            if (props.name !== 'delete_card') {
+              setFormInvalid(true);
+            }
+          }}
           onInput={handleInput}
           ref={formRef}
           noValidate>
@@ -56,7 +61,9 @@ function PopupWithForm(props) {
           <button
             type="submit"
             className={`popup__button popup__button_type_${props.name} 
-            ${formInvalid && 'popup__button_disabled'
+            ${
+              formInvalid & (props.name !== 'delete_card') &&
+              'popup__button_disabled'
             }`}
             disabled={formInvalid}>
             {props.name === 'delete_card' ? 'Si' : 'Guardar'}

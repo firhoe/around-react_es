@@ -89,6 +89,9 @@ function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   }
 
@@ -101,6 +104,9 @@ function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   }
 
@@ -113,6 +119,9 @@ function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   }
 
