@@ -1,9 +1,10 @@
 import React from 'react';
 import { useRef } from 'react';
+import { useState } from 'react';
 
 function PopupWithForm(props) {
-
   const formRef = useRef(null);
+  const [formInvalid, setFormInvalid] = useState(true);
 
   const handleInput = (event) => {
     const input = event.target;
@@ -21,6 +22,16 @@ function PopupWithForm(props) {
 
     // Actualizar el estado de los errores
     props.setErrors(errors);
+
+    const formInputs = formRef.current.elements;
+    if (formInputs.length > 0) {
+      const allInputsValid = Array.from(formInputs).every(
+        (input) => input.validity.valid
+      );
+      setFormInvalid(!allInputsValid);
+    } else {
+      setFormInvalid(false);
+    }
   };
 
   return (
@@ -44,7 +55,10 @@ function PopupWithForm(props) {
           {props.children}
           <button
             type="submit"
-            className={`popup__button popup__button_type_${props.name}`}>
+            className={`popup__button popup__button_type_${props.name} 
+            ${formInvalid && 'popup__button_disabled'
+            }`}
+            disabled={formInvalid}>
             {props.name === 'delete_card' ? 'Si' : 'Guardar'}
           </button>
         </form>

@@ -24,12 +24,10 @@ function EditProfilePopup(props) {
 
   function handleNameChange(evt) {
     setName(evt.target.value);
-    
   }
 
   function handleDescriptionChange(evt) {
     setDescription(evt.target.value);
-    
   }
 
   return (
