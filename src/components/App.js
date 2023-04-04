@@ -116,6 +116,19 @@ function App() {
       })
   }
 
+  const handleKeyPress = React.useCallback((e) => {
+    if (e.key === 'Escape') {
+      closeAllPopups();
+    }
+  }, []);
+
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   React.useEffect(() => {
     api
       .getUserInfo()
