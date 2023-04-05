@@ -15,7 +15,7 @@ function Main(props) {
               <img
                 className="profile__image"
                 src={currentUser.avatar}
-                alt="profile image"
+                alt="profile pic"
               />
               <div
                 className="profile__avatar-overlay"
