@@ -1,10 +1,8 @@
 import React from 'react';
 import { useRef } from 'react';
-import { useState } from 'react';
 
 function PopupWithForm(props) {
   const formRef = useRef(null);
-  const [formInvalid, setFormInvalid] = useState(props.name !== 'delete_card');
 
   const handleInput = (event) => {
     const input = event.target;
@@ -13,32 +11,27 @@ function PopupWithForm(props) {
     if (!input.form) {
       return;
     }
-
     if (!input.validity.valid) {
       errors[input.name] = input.validationMessage;
     } else {
       errors[input.name] = '';
     }
-
-    // Actualizar el estado de los errores
     props.setErrors(errors);
-
-    const formInputs = formRef.current.elements;
-    if (formInputs.length > 0) {
-      const allInputsValid = Array.from(formInputs).every(
-        (input) => input.validity.valid
-      );
-      setFormInvalid(!allInputsValid);
-    } else {
-      setFormInvalid(false);
-    }
   };
+
+  const isInvalid = () => {
+    if (!formRef.current) return false;
+    const formInputs = formRef.current.elements;
+    return Array.from(formInputs).some(input => {
+      return input.validity.valid === false;
+    })
+  }
 
   return (
     <section
       className={`popup popup_${props.name} ${
         props.isOpen ? 'popup_opened' : ''
-      }`}>
+      }`} onClick={props.handleExternalClick}>
       <div className="popup__container">
         <button
           type="button"
@@ -48,12 +41,7 @@ function PopupWithForm(props) {
         <form
           className={`popup_form popupform_type${props.name}`}
           name={props.name}
-          onSubmit={(evt) => {
-            props.onSubmit(evt);
-            if (props.name !== 'delete_card') {
-              setFormInvalid(true);
-            }
-          }}
+          onSubmit={props.onSubmit}
           onInput={handleInput}
           ref={formRef}
           noValidate>
@@ -62,10 +50,9 @@ function PopupWithForm(props) {
             type="submit"
             className={`popup__button popup__button_type_${props.name} 
             ${
-              formInvalid & (props.name !== 'delete_card') &&
-              'popup__button_disabled'
+              isInvalid() ? 'popup__button_disabled' : ''
             }`}
-            disabled={formInvalid}>
+            disabled={isInvalid()}>
             {props.name === 'delete_card' ? 'Si' : 'Guardar'}
           </button>
         </form>

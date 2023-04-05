@@ -26,7 +26,8 @@ function AddPlacePopup(props) {
         onClose={props.onClose}
         onSubmit={handleSubmit}
         errors={errors}
-        setErrors={setErrors}>
+        setErrors={setErrors}
+        handleExternalClick={props.handleExternalClick}>
         <>
           <label className="popup__field" htmlFor="popup-input-title">
             <input

@@ -11,6 +11,7 @@ function EditAvatarPopup(props) {
       props.onUpdateAvatar({
         avatar: imageRef.current.value,
       });
+      e.target.reset();
     }
 
     return (
@@ -21,7 +22,8 @@ function EditAvatarPopup(props) {
         onClose={props.onClose}
         onSubmit={handleSubmit}
         errors={errors}
-        setErrors={setErrors}>
+        setErrors={setErrors}
+        handleExternalClick={props.handleExternalClick}>
         <>
           <label className="popup__field" htmlFor="popup-input-image">
             <input

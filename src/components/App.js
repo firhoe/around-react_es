@@ -116,6 +116,12 @@ function App() {
       })
   }
 
+  const handleExternalClick = (event) => {
+    if (event.target.classList.contains('popup')) {
+      closeAllPopups();
+    }
+  }
+
   const handleKeyPress = React.useCallback((e) => {
     if (e.key === 'Escape') {
       closeAllPopups();
@@ -164,18 +170,21 @@ function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            handleExternalClick={handleExternalClick}
           />
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            handleExternalClick={handleExternalClick}
           />
 
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
+            handleExternalClick={handleExternalClick}
           />
 
           <DeletePopup
@@ -183,12 +192,14 @@ function App() {
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
             onCardDelete={handleCardDelete}
+            handleExternalClick={handleExternalClick}
           />
 
           <ImagePopup
             card={selectedCard}
             isOpen={isCardOpen}
             onClose={closeAllPopups}
+            handleExternalClick={handleExternalClick}
           />
         </div>
       </CurrentUserContext.Provider>
