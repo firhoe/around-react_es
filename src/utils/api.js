@@ -77,4 +77,4 @@ const api = new Api({
   groupId: groupId,
 });
 
-export {api};
+export default api;
